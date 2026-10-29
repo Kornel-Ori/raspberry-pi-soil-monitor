@@ -1,0 +1,52 @@
+
+{% extends "layout.html" %}
+
+{% block title %}My Plant | Soil Monitor{% endblock title %}
+
+{% block content %}
+<div class="mb-4">
+    <h1 class="fw-bold">My Plant Dashboard</h1>
+    <p class="text-secondary">
+        Monitor your plant's soil moisture.
+    </p>
+</div>
+
+<div class="row g-4">
+    {% for reading in sensor_readings %}
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <img
+              src="{{ url_for('static', path='/images/images.jpeg') }}"
+              class="plant-image"
+              alt="My plant"
+          >
+            <div class="card-body">
+                <h2 class="h5 card-title">
+                    🌱 {{ reading.sensor }}
+                </h2>
+
+                <p class="text-secondary mb-1">Soil moisture</p>
+                <p class="display-5 fw-bold">
+                    {{ reading.content }}%
+                </p>
+
+                <span class="badge bg-warning text-dark">
+                    {{ reading.status }}
+                </span>
+
+                <hr>
+
+                <small class="text-secondary">
+                    Updated:
+                    {{ reading.date_timestamp.strftime('%d %B %Y, %H:%M') }}
+                </small>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        <p>No sensor readings available.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
