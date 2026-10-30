@@ -73,3 +73,24 @@ class Reading(Base):
     author: Mapped[User] = relationship(
         back_populates="readings"
     )
+
+
+class WateringEvent(Base):
+    __tablename__ = "watering_event"
+
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True
+    )
+
+    sensor: Mapped[str] = mapped_column(
+        String(50), nullable=False
+    )
+
+    date_timestamp: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc)
+    )
+
+    amount_ml: Mapped[float | None] = mapped_column(
+        Float, nullable=True
+    )

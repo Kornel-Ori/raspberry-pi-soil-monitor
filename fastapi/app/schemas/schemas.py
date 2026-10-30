@@ -1,34 +1,27 @@
-from __future__ import annotations
-from pydantic import BaseModel, ConfigDict, Field, EmailStr
 from datetime import datetime
 
-class ReadingBase(BaseModel):
-    sensor: str = Field(min_length=1, max_length=20)
-    content: float
-    
-    
-class ReadingCreate(ReadingBase):
-    user_id: int #Temporary
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class ReadingResponse(ReadingBase):
-    model_config = ConfigDict(from_attributes=True)
+# Used when creating a new reading
+class ReadingCreate(BaseModel):
+    sensor: str = Field(min_length=1, max_length=50)
+    content: float = Field(ge=0, le=100)
+    user_id: int = Field(gt=0)
+
+
+# Used when updating an existing reading
+class ReadingUpdate(BaseModel):
+    sensor: str | None = Field(default=None, min_length=1, max_length=50)
+    content: float | None = Field(default=None, ge=0, le=100)
+
+
+# Used when returning a reading to the client
+class ReadingResponse(BaseModel):
     id: int
+    sensor: str
+    content: float
     user_id: int
     date_timestamp: datetime
-    author: UserResponse
-    
-    
-class UserBase(BaseModel):
-    username:str = Field(min_length=3, max_length=20)
-    email: EmailStr = Field(max_length=320)
-    
-    
-class UserCreate(UserBase):
-    pass 
 
-class UserResponse(UserBase):
     model_config = ConfigDict(from_attributes=True)
-    id: int
-    image_file: str | None
-    image_path: str
