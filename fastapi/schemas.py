@@ -53,6 +53,7 @@ class PlantBase(BaseModel):
     plant_name: str = Field(min_length=1, max_length=100)
     location: str | None = None
     min_moisture: float | None = Field(default=None, ge=0, le=100)
+    image_url: str | None = Field(default=None, max_length=255)
 
 
 class PlantCreate(PlantBase):
@@ -68,6 +69,10 @@ class PlantResponse(PlantBase):
     species_id: int
     created_at: datetime
 
+class PlantUpdate(BaseModel):
+    plant_name: str | None = Field(default=None, min_length=1, max_length=100)
+    location: str | None = Field(default=None)
+    min_moisture: float | None = Field(default=None, ge=0, le=100)
 
 #--------Node
 class NodeBase(BaseModel):
