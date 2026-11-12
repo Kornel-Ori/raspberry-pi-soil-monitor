@@ -1,9 +1,8 @@
-from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.schemas.schemas import ReadingCreate, ReadingResponse
-from app.models.models import Reading
+from schemas import ReadingCreate, ReadingResponse, ReadingUpdate
+from models import Reading
 
 
 def create_reading(db: Session, schema: ReadingCreate) -> ReadingResponse:
@@ -37,7 +36,7 @@ def get_reading_by_id(db: Session, reading_id: int) -> ReadingResponse | None:
     return ReadingResponse.model_validate(reading)
 
 
-def update_reading(db: Session, reading_id: int, schema: ReadingCreate) -> ReadingResponse | None:
+def update_reading(db: Session, reading_id: int, schema: ReadingUpdate) -> ReadingResponse | None:
     reading = db.get(Reading, reading_id)
     if reading is None:
         return None

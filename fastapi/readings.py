@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 
-from app.database.database import get_db
-from app.schemas.schemas import ReadingCreate, ReadingUpdate, ReadingResponse
+from database import get_db
+from schemas import ReadingCreate, ReadingUpdate, ReadingResponse
 
-from app.services.reading_service import (
+from reading_service import (
     create_reading,
     get_readings,
     get_reading_by_id,
