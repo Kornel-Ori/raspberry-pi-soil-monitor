@@ -1,0 +1,17 @@
+{
+  "name": "Soil Monitor",
+  "short_name": "Soil Monitor",
+  "description": "Raspberry Pi Soil Moisture Monitoring System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#198754",
+  "icons": [
+    {
+      "src": "/static/images/plant.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
