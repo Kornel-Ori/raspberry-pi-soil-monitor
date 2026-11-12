@@ -1,4 +1,4 @@
-from app.schemas.schemas import ReadingCreate
+from fastapi.schemas import ReadingCreate
 
 reading = ReadingCreate(
     sensor="Plant Sensor 1",
