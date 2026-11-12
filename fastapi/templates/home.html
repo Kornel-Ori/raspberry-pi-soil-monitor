@@ -4,49 +4,81 @@
 {% block title %}My Plant | Soil Monitor{% endblock title %}
 
 {% block content %}
+
 <div class="mb-4">
     <h1 class="fw-bold">My Plant Dashboard</h1>
     <p class="text-secondary">
-        Monitor your plant's soil moisture.
+        Monitor your plants and soil moisture levels.
     </p>
 </div>
 
 <div class="row g-4">
+
     {% for reading in sensor_readings %}
+
     <div class="col-12 col-md-6 col-lg-4">
-        <div class="card shadow-sm h-100">
-          <img
-              src="{{ url_for('static', path='/images/images.jpeg') }}"
-              class="plant-image"
-              alt="My plant"
-          >
+
+        <div class="card shadow-sm border-0 h-100">
+
+            <img
+                src="{{ url_for('static', path='images/images.jpeg') }}"
+                class="plant-image card-img-top"
+                alt="My plant"
+            >
+
             <div class="card-body">
+
                 <h2 class="h5 card-title">
-                    🌱 {{ reading.sensor }}
+                    🌱 {{ reading.node.device_name }}
                 </h2>
 
-                <p class="text-secondary mb-1">Soil moisture</p>
-                <p class="display-5 fw-bold">
-                    {{ reading.content }}%
+                <p class="text-secondary mb-1">
+                    Soil moisture
                 </p>
 
-                <span class="badge bg-warning text-dark">
-                    {{ reading.status }}
+                <p class="display-5 fw-bold mb-2">
+                    {{ reading.moisture_percent }}%
+                </p>
+
+                <!-- Moisture progress bar -->
+                <div class="progress mb-3" style="height: 10px;">
+                    <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: {{ reading.moisture_percent }}%;"
+                        aria-valuenow="{{ reading.moisture_percent }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+                    </div>
+                </div>
+
+                <!-- Node status -->
+                <span class="badge bg-success">
+                    {{ reading.node.status }}
                 </span>
 
                 <hr>
 
                 <small class="text-secondary">
                     Updated:
-                    {{ reading.date_timestamp.strftime('%d %B %Y, %H:%M') }}
+                    {{ reading.recorded_at.strftime('%d %B %Y, %H:%M') }}
                 </small>
+
             </div>
         </div>
+
     </div>
+
     {% else %}
+
     <div class="col-12">
-        <p>No sensor readings available.</p>
+        <div class="alert alert-info">
+            No sensor readings available.
+        </div>
     </div>
+
     {% endfor %}
+
 </div>
+
 {% endblock content %}
