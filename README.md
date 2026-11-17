@@ -19,16 +19,15 @@ Each sensor monitors the moisture level of the soil in a plant pot or growing ar
 
 ## Hardware Requirements
 
-- Raspberry Pi
-- Multiple soil moisture sensors (preferably capacitive sensors)
-- MCP3008 analogue-to-digital converter (ADC), if using analogue sensors
-- LEDs for moisture status indication
-- Current-limiting resistors for the LEDs
+- Raspberry Pi 5
+- Soil Moisture Sensor Kit
+  - Moisture Sensor Spade
+  - Moisture Sensor Comparator Board (based on LM393)
+  - LED Indicators 
+- ADS1115 16-bit ADC module (16 bit, 4 channel analog to digital)
 - Breadboard and jumper wires
 - Power supply for the Raspberry Pi
 - Plant pots and soil for testing
-
-**Note:** The Raspberry Pi does not have built-in analogue inputs. If the selected soil moisture sensors provide analogue output, an ADC such as the MCP3008 is required to read their values.
 
 ## How It Works
 
