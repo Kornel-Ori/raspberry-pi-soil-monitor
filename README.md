@@ -26,7 +26,6 @@ Each sensor monitors the moisture level of the soil in a plant pot or growing ar
   - LED Indicators 
 - ADS1115 16-bit ADC module (16 bit, 4 channel analog to digital)
 - Breadboard and jumper wires
-- Power supply for the Raspberry Pi
 - Plant pots and soil for testing
 
 ## How It Works
