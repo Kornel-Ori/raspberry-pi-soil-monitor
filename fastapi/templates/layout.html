@@ -20,7 +20,10 @@
     >
     <link rel="manifest" href="{{ url_for('static', path='/manifest.json') }}">
     <link rel="icon" type="image/png"
-      href="{{ url_for('static', path='/images/plant.png') }}">
+      href="/static/icons/plant.png?v=2">
+
+    <link rel="apple-touch-icon"
+      href="{{ url_for('static', path='/icons/plant.png') }}">
 
     {% block extra_css %}{% endblock extra_css %}
 </head>
@@ -92,16 +95,12 @@
     <footer class="bg-dark text-light py-4 mt-auto">
         <div class="container text-center">
 
-            <p class="mb-1 fw-semibold">
-                🌱 Soil Monitor
-            </p>
-
             <small class="text-secondary">
                 Raspberry Pi Soil Moisture Monitoring Project
             </small>
 
             <p class="text-secondary small mb-0 mt-2">
-                &copy; 2026 Soil Monitor. All rights reserved.
+                &copy; 2026 Kornel Ori
             </p>
 
         </div>
