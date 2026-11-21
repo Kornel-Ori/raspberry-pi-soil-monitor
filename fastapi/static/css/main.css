@@ -1,44 +1,401 @@
 
-/* General */
+/* Prevent page scrolling */
+html,
 body {
-    font-family: Arial, sans-serif;
-}
-
-/* Plant cards */
-.card {
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Plant images */
-.plant-image {
     width: 100%;
-    height: 200px;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Floating transparent navbar */
+.main-navbar {
+    position: fixed;
+    top: 18px;
+    left: 25px;
+    right: 25px;
+    z-index: 1000;
+
+    min-height: 75px;
+    padding: 10px 0;
+
+    background: rgba(25, 135, 84, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.main-navbar .navbar-brand {
+    letter-spacing: 0.5px;
+}
+
+.main-navbar .nav-link {
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 10px 14px !important;
+}
+
+.main-navbar .nav-link:hover {
+    color: #d1fae5;
+}
+
+/* Main content fills the screen */
+.main-content {
+    min-height: 100vh;
+    padding: 0;
+}
+
+
+
+
+
+/* Plant heading */
+.plant-name {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #203d29;
+}
+
+.plant-subtitle {
+    color: #52805b;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+
+
+
+/* History link */
+.history-link {
+    color: #287a43;
+    font-weight: 600;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.history-link:hover {
+    text-decoration: underline;
+}
+
+/* Last measurement */
+.last-measurement {
+    position: absolute;
+    bottom: 25px;
+    right: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+
+    color: #7a897d;
+    font-size: 0.78rem;
+}
+
+.last-measurement strong {
+    color: #405b46;
+    font-size: 0.85rem;
+}
+
+
+
+
+/* Plant information */
+.plant-description {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 5px;
+}
+
+.plant-description .plant-subtitle {
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.plant-description .plant-name {
+    width: 100%;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #1d3e63;
+    margin-bottom: 12px;
+}
+
+.common-name {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #4781b9;
+    margin-bottom: 18px;
+}
+
+.plant-text {
+    width: 100%;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #526b83;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Dashboard */
+.plant-dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Plant image */
+.plant-photo {
+    position: relative;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.plant-photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-/* Dashboard headings */
-h1, h2, h3 {
-    color: #245c38;
+/* Plant description overlay */
+.plant-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 35px;
+    background: linear-gradient(
+        transparent,
+        rgba(10, 30, 50, 0.85)
+    );
+    color: white;
 }
 
-/* Moisture progress bar */
-.progress {
-    border-radius: 10px;
-    background-color: #e5e7eb;
+.plant-description .plant-subtitle {
+    color: #d1e7ff;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
 
-.progress-bar {
-    border-radius: 10px;
+.plant-description .plant-name {
+    color: white;
+    font-size: 2.8rem;
+    margin-bottom: 8px;
 }
 
-/* Navigation */
-.navbar-brand {
-    letter-spacing: 0.3px;
+.common-name {
+    color: #b9dcff;
+    font-size: 1.6rem;
+}
+
+.plant-text {
+    color: #f0f5fa;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    max-width: 750px;
+}
+
+/* Right information panel */
+.plant-details {
+    height: 100%;
+    min-width: 0;
+    padding: 110px 30px 30px;
+    background: linear-gradient(145deg, #edf5ff, #dceaff);
+    overflow: hidden;
+}
+
+/* Moisture display */
+.moisture-full {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.moisture-full .plant-subtitle {
+    color: #4781b9;
+    font-size: 1rem;
+}
+
+.moisture-percentage {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: #2674c7;
+}
+
+.moisture-percentage span {
+    font-size: 2rem;
+}
+
+/* Full-height water barrel */
+.water-barrel-large {
+    position: relative;
+    width: 145px;
+    height: 310px;
+    border: 5px solid #3288dc;
+    border-radius: 20px 20px 28px 28px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.55);
+    box-shadow: inset 0 0 15px rgba(50,136,220,0.12);
+    flex-shrink: 0;
+}
+
+.barrel-water-large {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #65b5f5, #2674c7);
+    transition: height 0.5s ease;
+}
+
+.barrel-level {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #173b60;
+}
+
+/* Moisture feedback */
+.moisture-feedback {
+    max-width: 300px;
+    color: #526b83;
+}
+
+.moisture-feedback h4 {
+    color: #2674c7;
+    font-weight: 700;
+}
+
+.moisture-feedback p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Sensor status */
+.sensor-status {
+    margin-top: 5px;
+}
+
+.sensor-status .info-label {
+    color: #70869e;
+}
+
+/* Last measurement */
+.last-measurement {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #70869e;
+    font-size: 0.8rem;
+}
+
+.last-measurement strong {
+    color: #3d5c7c;
+    font-size: 0.85rem;
+}
+
+.graph-box {
+    width: 100%;
+    flex: 1;
+    min-height: 150px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.graph-heading {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.graph-heading .info-label {
+    color: #4781b9;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.graph-heading h5 {
+    color: #1d3e63;
+    margin: 3px 0;
+}
+
+.graph-box canvas {
+    width: 100% !important;
+    flex: 1;
+    min-height: 0;
+}
+
+@media (max-width: 991px) {
+    html,
+    body {
+        overflow: auto;
+    }
+
+    .plant-dashboard {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    .plant-photo {
+        height: 65vh;
+        min-height: 400px;
+    }
+
+    .plant-details {
+        min-height: 650px;
+        padding: 110px 25px 30px;
+    }
+
+    .water-barrel-large {
+        height: 250px;
+    }
+}
+
+@media (max-width: 575px) {
+    .plant-photo {
+        height: 55vh;
+        min-height: 350px;
+    }
+
+    .plant-description {
+        padding: 20px;
+    }
+
+    .plant-description .plant-name {
+        font-size: 2rem;
+    }
+
+    .plant-text {
+        font-size: 1rem;
+    }
+
+    .moisture-percentage {
+        font-size: 3rem;
+    }
 }
