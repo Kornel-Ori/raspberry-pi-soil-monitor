@@ -1,84 +1,111 @@
-
 {% extends "layout.html" %}
 
 {% block title %}My Plant | Soil Monitor{% endblock title %}
 
 {% block content %}
 
-<div class="mb-4">
-    <h1 class="fw-bold">My Plant Dashboard</h1>
-    <p class="text-secondary">
-        Monitor your plants and soil moisture levels.
-    </p>
-</div>
+{% if reading %}
 
-<div class="row g-4">
+<div class="plant-dashboard">
 
-    {% for reading in sensor_readings %}
+    <!-- Left: Plant image and information -->
+    <div class="plant-photo">
 
-    <div class="col-12 col-md-6 col-lg-4">
+        <img
+            src="{{ url_for('static', path='images/bonsai.jpg') }}"
+            alt="Ficus microcarpa">
 
-        <div class="card shadow-sm border-0 h-100">
+        <div class="plant-description">
+            <p class="plant-subtitle">YOUR PLANT</p>
 
-            <img
-                src="{{ url_for('static', path='images/images.jpeg') }}"
-                class="plant-image card-img-top"
-                alt="My plant"
-            >
+            <h1 class="plant-name">
+                <em>Ficus microcarpa</em>
+            </h1>
 
-            <div class="card-body">
+            <h5 class="common-name">Chinese Banyan</h5>
 
-                <h2 class="h5 card-title">
-                    🌱 {{ reading.node.device_name }}
-                </h2>
+            <p class="plant-text">
+                An evergreen ornamental plant with glossy, dark-green oval leaves.
+                Known for its dense foliage and distinctive aerial roots,
+                it is commonly grown indoors and as a bonsai tree.
+            </p>
+        </div>
 
-                <p class="text-secondary mb-1">
-                    Soil moisture
-                </p>
+    </div>
 
-                <p class="display-5 fw-bold mb-2">
-                    {{ reading.moisture_percent }}%
-                </p>
+    <!-- Right: Moisture display -->
+    <div class="plant-details">
 
-                <!-- Moisture progress bar -->
-                <div class="progress mb-3" style="height: 10px;">
-                    <div
-                        class="progress-bar bg-success"
-                        role="progressbar"
-                        style="width: {{ reading.moisture_percent }}%;"
-                        aria-valuenow="{{ reading.moisture_percent }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100">
-                    </div>
+        <div class="moisture-full">
+
+            <p class="plant-subtitle">SOIL MOISTURE</p>
+
+            <div class="moisture-percentage">
+                {{ reading.moisture_percent }}<span>%</span>
+            </div>
+
+            <div class="water-barrel-large">
+                <div class="barrel-water-large"
+                     style="height: {{ reading.moisture_percent }}%;">
                 </div>
 
-                <!-- Node status -->
-                <span class="badge bg-success">
-                    {{ reading.node.status }}
+                <span class="barrel-level">
+                    {{ reading.moisture_percent }}%
                 </span>
-
-                <hr>
-
-                <small class="text-secondary">
-                    Updated:
-                    {{ reading.recorded_at.strftime('%d %B %Y, %H:%M') }}
-                </small>
-
             </div>
-        </div>
 
+            <!-- Moisture history graph -->
+<div class="floating-info graph-box">
+
+    <div class="graph-heading">
+        <span class="info-label">MOISTURE HISTORY</span>
+        <h5>Last 24 hours</h5>
     </div>
 
-    {% else %}
-
-    <div class="col-12">
-        <div class="alert alert-info">
-            No sensor readings available.
-        </div>
-    </div>
-
-    {% endfor %}
+    <canvas id="moistureChart"></canvas>
 
 </div>
+
+            <div class="moisture-feedback">
+                <h4>Moderate moisture</h4>
+                <p>
+                    Your plant has a reasonable amount of moisture.
+                    Continue monitoring the soil.
+                </p>
+            </div>
+
+            <div class="sensor-status">
+                <span class="info-label">Sensor status</span>
+                <h5>
+                    <span class="badge bg-success">
+                        {{ reading.node.status }}
+                    </span>
+                </h5>
+            </div>
+
+            <a href="/sensor-readings/" class="history-link">
+                View sensor history →
+            </a>
+
+            <div class="last-measurement">
+                <span>Last measurement</span>
+                <strong>
+                    {{ reading.recorded_at.strftime('%d %b %Y, %H:%M') }}
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info">
+    No sensor readings available yet.
+</div>
+
+{% endif %}
 
 {% endblock content %}

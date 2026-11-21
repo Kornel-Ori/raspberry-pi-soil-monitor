@@ -19,4 +19,7 @@ htmlcov/
 # IDE and macOS files
 .idea/
 .vscode/
+.DS_Store.DS_Store
+
 .DS_Store
+**/.DS_Store
